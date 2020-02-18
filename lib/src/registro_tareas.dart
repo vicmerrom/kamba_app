@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx_prueba/services/class.dart';
+import 'package:mobx_prueba/services/services.dart';
 
 class RegistroTareasPage extends StatefulWidget {
   final List<Usuarios> usuariosLogeado;
@@ -14,13 +15,15 @@ class _RegistroTareasPageState extends State<RegistroTareasPage> with SingleTick
 
   Usuarios selectedUsuario;
 
+  Tareas nuevaTarea;
+
   @override
   void initState() {
 
     super.initState();
   }
 
-DateTime selectedDate = DateTime.now();
+  DateTime selectedDate = DateTime.now();
   TextEditingController _date = new TextEditingController();
 
   Future<Null> _selectDate(BuildContext context) async {
@@ -50,7 +53,19 @@ DateTime selectedDate = DateTime.now();
           IconButton(
             icon: Icon(Icons.save), 
             tooltip: 'Guardar Tarea',
-            onPressed: ()=> print(''),
+            onPressed: () {
+              //descripcion, fecha_asig, periodo, fecha_ent, status  //ORDEN DE LOS VALORES
+              List<String> ls = [];
+              ls.add(nuevaTarea.descripcion);
+              ls.add(DateTime.now().toString());
+              ls.add(nuevaTarea.fecha_asig.toString());
+              ls.add(nuevaTarea.periodo);
+              ls.add(nuevaTarea.fecha_ent.toString());
+              ls.add(nuevaTarea.status);
+              var lsn = (ls.toString()).replaceAll('[', '');
+              lsn = (ls.toString()).replaceAll(']', '');
+              guardarTareas(lsn);
+            },
           ),
         ],
       ),        
@@ -65,6 +80,7 @@ DateTime selectedDate = DateTime.now();
               decoration: InputDecoration(
                 suffixIcon: Icon(Icons.keyboard),
               ),
+              onChanged: (v) => nuevaTarea.descripcion = v,
             ),
             Padding(padding: EdgeInsets.all(10.00),),
             _text('Fecha límite'),
@@ -79,6 +95,7 @@ DateTime selectedDate = DateTime.now();
                       Icons.calendar_today,
                     ),
                   ),
+                  onChanged: (f) => nuevaTarea.fecha_ent = selectedDate,
                 ),
               ),
             ),
@@ -89,7 +106,7 @@ DateTime selectedDate = DateTime.now();
               isExpanded: true,
               hint:  Text("Por defecto"),
               value: selectedUser,
-              onChanged: (Item Value) { },
+              onChanged: (Item v) => print('object'),
               items: users.map((Item user) {
                 return  DropdownMenuItem<Item>(
                   value: user,

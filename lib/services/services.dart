@@ -16,6 +16,12 @@ Future<List<Tareas>> consultaTareas() async {
   return listR;
 }
 
+void guardarTareas(String valor) async {
+  var connection = PostgreSQLConnection(host, puerto, db, username: user, password: passw);
+  await connection.open();
+  await connection.query("INSERT INTO dbo.tarea(descripcion, fecha_asig, periodo, fecha_ent, status) VALUES ($valor);");
+}
+
 Future<List<Usuarios>> consultaUsuarios(String pass) async {
   var connection = PostgreSQLConnection(host, puerto, db, username: user, password: passw);
   List<Usuarios> listR = [];
