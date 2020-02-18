@@ -72,13 +72,10 @@ class _HomeTareasPageState extends State<HomeTareasPage> with SingleTickerProvid
         indicatorSize: TabBarIndicatorSize.tab,),
         bottomOpacity: 1,
         actions: <Widget>[
-          Observer( builder: (_) =>
-            _counterHomeTareas.buscarTareas == false ? 
-              IconButton(
-                icon: Icon(Icons.insert_chart), 
-                tooltip: 'Chart', 
-                onPressed: () => _counterHomeTareas.changebuscarTareas()
-              ) : widgetNone,
+          IconButton(
+            icon: Icon(Icons.insert_chart), 
+            tooltip: 'Chart', 
+            onPressed: () => print(''),
           ),
           Observer( builder: (_) =>
             _counterHomeTareas.buscarTareas == false ? 
@@ -134,6 +131,50 @@ class _HomeTareasPageState extends State<HomeTareasPage> with SingleTickerProvid
     );
   }
 
+  void _dialogInfoTareas(context, Tareas dt) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          //title: Text("¿Está seguro que desea finalizar esta tarea?"),
+          content: Container(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                ListTile(
+                  title: Text('Descripción'),
+                  subtitle: Text(dt.descripcion),
+                ),
+                ListTile(
+                  title: Text('Fecha de creación'),
+                  subtitle: Text(fechaFiltrada(dt.fecha_asig.toString(), '.')),
+                ),
+                ListTile(
+                  title: Text('Fecha limite'),
+                  subtitle: Text(fechaFiltrada(dt.fecha_asig.toString(), '.')),
+                ),
+                ListTile(
+                  title: Text('Usuario asignado'),
+                  subtitle: Text('PEDRO PEREZ'),
+                ),
+                ListTile(
+                  title: Text('Estado de la tarea'),
+                  subtitle: Text(dt.status),
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text("CERRAR"),
+              onPressed: ()  => Navigator.of(context).pop(),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   Widget containerListaTareas(status){
     List<Widget> listR = [];
     for (var i = 0; i < listaTareas.length; i++) {
@@ -171,6 +212,7 @@ class _HomeTareasPageState extends State<HomeTareasPage> with SingleTickerProvid
             ),
             title: Text(listaTareas[i].descripcion),
             subtitle: Text(fechaFiltrada(listaTareas[i].fecha_asig.toString(), '.')),
+            onLongPress: () => _dialogInfoTareas(context, listaTareas[i]),
           ),
         ));         
       }
@@ -191,3 +233,17 @@ class _HomeTareasPageState extends State<HomeTareasPage> with SingleTickerProvid
     var d = (fecha == null ? (DateTime.now().toString()) : fecha).split(splid);
     return d[0];
   }
+
+
+  class Item {
+    const Item(this.name,this.icon);
+    final String name;
+    final Icon icon;
+  }
+  Item selectedUser;
+  List<Item> users = <Item>[
+    const Item('Mantenimiento',Icon(Icons.android,color:  const Color(0xFF167F67),)),
+    const Item('Reparacion',Icon(Icons.flag,color:  const Color(0xFF167F67),)),
+    const Item('Entrenamiento',Icon(Icons.format_indent_decrease,color:  const Color(0xFF167F67),)),
+    const Item('Instalacion',Icon(Icons.mobile_screen_share,color:  const Color(0xFF167F67),)),
+  ];
