@@ -2,11 +2,11 @@ import 'package:mobx_prueba/services/class.dart';
 import 'package:postgres/postgres.dart';
 export 'services.dart';
 
-var host = '192.168.0.50';
-var puerto = 5432;
-var user = 'postgres';
-var pass = '123456';
-var db = 'tareas';
+String host = '192.168.0.50';
+int puerto = 5432;
+String user = 'postgres';
+String pass = '123456';
+String db = 'tareas';
 
 Future<List<Tareas>> consultaTareas() async {
   var connection = PostgreSQLConnection(host, puerto, db, username: user, password: pass);
@@ -23,7 +23,7 @@ Future<List<Tareas>> consultaTareas() async {
 }
 
 Future<List<Usuarios>> consultaUsuarios(String pass) async {
-  var connection = PostgreSQLConnection('192.168.0.50', 5432, "tareas", username: 'postgres', password: '123456');
+  var connection = PostgreSQLConnection(host, puerto, db, username: user, password: '123456');
   List<Usuarios> listR = [];
   await connection.open();
   List<List<dynamic>> results = await connection.query("SELECT * FROM dbo.usuario WHERE contrasena = '$pass'");

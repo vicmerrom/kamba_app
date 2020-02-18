@@ -50,10 +50,10 @@ mixin _$MobxHomeTareas on _MobxHomeTareasBase, Store {
       ActionController(name: '_MobxHomeTareasBase');
 
   @override
-  void actionTareaSeleccionada(int entero, String accion) {
+  void actionTareaSeleccionada(int entero) {
     final _$actionInfo = _$_MobxHomeTareasBaseActionController.startAction();
     try {
-      return super.actionTareaSeleccionada(entero, accion);
+      return super.actionTareaSeleccionada(entero);
     } finally {
       _$_MobxHomeTareasBaseActionController.endAction(_$actionInfo);
     }

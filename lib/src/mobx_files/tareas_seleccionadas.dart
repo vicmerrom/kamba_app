@@ -10,9 +10,8 @@ abstract class _MobxHomeTareasBase with Store {
   int tareas_selccionadas;
 
   @action
-  void actionTareaSeleccionada(int entero, String accion) {
-    accion == 'i' ? tareas_selccionadas = entero : tareas_selccionadas = null;
-    tareas_selccionadas = tareas_selccionadas;
+  void actionTareaSeleccionada(int entero) {
+    tareas_selccionadas = entero;
   }
 
   

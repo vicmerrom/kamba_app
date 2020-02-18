@@ -118,6 +118,7 @@ class _HomeTareasPageState extends State<HomeTareasPage> with SingleTickerProvid
             FlatButton(
               child: Text("CANCELAR"),
               onPressed: () {
+                _counterHomeTareas.actionTareaSeleccionada(null);
                 Navigator.of(context).pop();
               },
             ),
@@ -160,13 +161,13 @@ class _HomeTareasPageState extends State<HomeTareasPage> with SingleTickerProvid
             ? Checkbox(
               value: _counterHomeTareas.tareas_selccionadas == i ? true : false,
               onChanged: (b) {
-                _counterHomeTareas.actionTareaSeleccionada(i, (b ? 'i' : 'd'));
+                _counterHomeTareas.actionTareaSeleccionada(i);
                 if (_counterHomeTareas.tareas_selccionadas == i) {
                   _confirmacionTerminarTarea();
                 }  
               }
             )
-            : Icon(Icons.check_circle, color: Colors.green, size: 40.00,)
+            : Icon(Icons.check_circle, color: Colors.green, size: 35.00,)
             ),
             title: Text(listaTareas[i].descripcion),
             subtitle: Text(fechaFiltrada(listaTareas[i].fecha_asig.toString(), '.')),

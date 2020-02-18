@@ -57,7 +57,8 @@ DateTime selectedDate = DateTime.now();
       backgroundColor: Colors.grey[300],
       body: Container(
         margin: EdgeInsets.all(20.00),
-        child: Column(
+        width: MediaQuery.of(context).size.width - 40.00,
+        child: ListView(
           children: <Widget>[
             _text('¿Qué hay que hacer?'),
             TextField(
