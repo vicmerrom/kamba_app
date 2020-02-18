@@ -3,6 +3,7 @@ import 'package:crypto/crypto.dart';
 import 'package:edge_alert/edge_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx_prueba/services/class.dart';
+import 'package:mobx_prueba/services/services.dart';
 import 'package:postgres/postgres.dart';
 import 'home_tareas.dart';
         
@@ -88,7 +89,7 @@ class _LoginPageState extends State<LoginPage> {
         onPressed: () => logearUsuario(myControllerUser.text, myControllerPass.text),
         padding: EdgeInsets.all(12),
         color: Colors.lightBlueAccent,
-        child: Text('Iniciar Seccion', style: TextStyle(color: Colors.white)),
+        child: Text('Iniciar Sesión', style: TextStyle(color: Colors.white)),
       ),
     );
 
@@ -134,23 +135,10 @@ class _LoginPageState extends State<LoginPage> {
     return "$digest";
   }
 
-  Future<List<Usuarios>> consultaUsuarios(String pass) async {
-  var connection = PostgreSQLConnection('192.168.0.50', 5432, "tareas", username: 'postgres', password: '123456');
-  List<Usuarios> listR = [];
-  await connection.open();
-  List<List<dynamic>> results = await connection.query("SELECT * FROM dbo.usuario WHERE contrasena = '$pass'");
-  for (final row in results) {
-    Usuarios t = Usuarios(row[0],row[1],row[2],row[3],row[4],row[5]);
-    listR.add(t);
-  }
-  return listR;
-}
+
 
   void logearUsuario(usuario, password) async {
     consultaUsuarios(password).then((res) {
-      print(res);
-      print(password);
-      print(res[0].contrasena.toString());
       for (var item in res) {
         if (res.length > 0) {
           item.contrasena == password 

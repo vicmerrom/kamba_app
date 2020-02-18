@@ -76,7 +76,7 @@ class _HomeTareasPageState extends State<HomeTareasPage> with SingleTickerProvid
             _counterHomeTareas.buscarTareas == false ? 
               IconButton(
                 icon: Icon(Icons.insert_chart), 
-                tooltip: 'chart', 
+                tooltip: 'Chart', 
                 onPressed: () => _counterHomeTareas.changebuscarTareas()
               ) : widgetNone,
           ),
@@ -166,7 +166,7 @@ class _HomeTareasPageState extends State<HomeTareasPage> with SingleTickerProvid
                 }  
               }
             )
-            : Icon(Icons.check_circle, color: Colors.green,)
+            : Icon(Icons.check_circle, color: Colors.green, size: 40.00,)
             ),
             title: Text(listaTareas[i].descripcion),
             subtitle: Text(fechaFiltrada(listaTareas[i].fecha_asig.toString(), '.')),

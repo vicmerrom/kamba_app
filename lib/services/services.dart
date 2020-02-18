@@ -22,14 +22,11 @@ Future<List<Tareas>> consultaTareas() async {
   return listR;
 }
 
-//Future<void> cerrarConexion() async => await connection.open();
-
 Future<List<Usuarios>> consultaUsuarios(String pass) async {
-  var connection = PostgreSQLConnection(host, puerto, db, username: user, password: pass);
+  var connection = PostgreSQLConnection('192.168.0.50', 5432, "tareas", username: 'postgres', password: '123456');
   List<Usuarios> listR = [];
   await connection.open();
   List<List<dynamic>> results = await connection.query("SELECT * FROM dbo.usuario WHERE contrasena = '$pass'");
-  print(results);
   for (final row in results) {
     Usuarios t = Usuarios(row[0],row[1],row[2],row[3],row[4],row[5]);
     listR.add(t);

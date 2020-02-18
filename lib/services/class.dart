@@ -19,15 +19,15 @@ class Usuarios{
   int id;
   String nombre;
   String apellido;
+  String email;
   String contrasena;
   String conf_contrasena;
-  String email;
     Usuarios(
       this.id,
       this.nombre,
       this.apellido,
+      this.email,
       this.contrasena,
       this.conf_contrasena,
-      this.email,
     );
 }
