@@ -135,8 +135,6 @@ class _LoginPageState extends State<LoginPage> {
     return "$digest";
   }
 
-
-
   void logearUsuario(usuario, password) async {
     consultaUsuarios(password).then((res) {
       for (var item in res) {
@@ -150,11 +148,5 @@ class _LoginPageState extends State<LoginPage> {
       }
     });
   }
-
-    //for (var i = 0; i < listaUserAuth.length; i++) {
-         
-    //} 
-  //}
-
 
 }//

@@ -13,6 +13,9 @@ class Tareas{
       this.fecha_ent,
       this.status,
     );
+    factory Tareas.fromUsuarios(List l){
+      return Tareas(l[0],l[1],l[2],l[3],l[4],l[5]);
+    }
 }
 
 class Usuarios{
@@ -30,4 +33,7 @@ class Usuarios{
       this.contrasena,
       this.conf_contrasena,
     );
+    factory Usuarios.fromUsuarios(List l){
+      return Usuarios(l[0],l[1],l[2],l[3],l[4],l[5]);
+    }
 }
